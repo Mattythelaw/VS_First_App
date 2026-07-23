@@ -7,10 +7,13 @@ export default function App() {
       <Image style={styles.mainImg}source={require('./images/coding.png')}/>
 
       <Text style={styles.welcomeTxt}>Welcome to my app!</Text>
-      <Text style={styles.welcomeTxt}>Enter your name:</Text>
-      <TextInput placeholder="John"/>
-      <Text style={styles.welcomeTxt}>Enter your surname:</Text>
-      <TextInput placeholder="Carter"/>
+
+      <View style={styles.inputFlex}>
+      <Text style={styles.headingTxt}>Enter your name:</Text>
+      <TextInput style={styles.inputBoxTxt}placeholder="John"/>
+      <Text style={styles.headingTxt}>Enter your surname:</Text>
+      <TextInput style={styles.inputBoxTxt}placeholder="Carter"/>
+      </View>
 
       <Button title="Add User"/>
       <StatusBar style="auto" />
@@ -41,6 +44,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 250,
     width: 250
+  },
+
+  inputFlex:{
+    flexDirection: 'row',
+    marginTop:30
   }
-  
+
 });
