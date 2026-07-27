@@ -1,8 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Image,  } from 'react-native';
+import { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function App() {
+
+  const Stack = createNativeStackNavigator();
+
   return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name = "Home" component= {Mainscreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+function Mainscreen(){
+  const [Name, setName] = useState('');
+  const [Surname, setSurname] = useState('');
+
+  console.log('App works!');
+
+  return(
+
     <View >
       <Image style={styles.mainImg}source={require('./images/coding.png')}/>
 
@@ -10,15 +32,25 @@ export default function App() {
 
       <View style={styles.inputFlex}>
       <Text style={styles.headingTxt}>Enter your name:</Text>
-      <TextInput style={styles.inputBoxTxt}placeholder="John"/>
+
+      <TextInput style={styles.inputBoxTxt}placeholder="John"
+      onChangeText={newText => setName(newText)} />
+
       <Text style={styles.headingTxt}>Enter your surname:</Text>
-      <TextInput style={styles.inputBoxTxt}placeholder="Carter"/>
+
+      <TextInput style={styles.inputBoxTxt}placeholder="Carter"
+      onChangeText={newText => setSurname(newText)}/>
       </View>
 
-      <Button title="Add User"/>
+      <Button title="Add User"
+        onPress={() => {
+          console.log("Name: " + Name + "Surname: " + Surname) }}/>
+
       <StatusBar style="auto" />
     </View>
-  );
+
+  )
+
 }
 
 const styles = StyleSheet.create({
@@ -35,7 +67,7 @@ const styles = StyleSheet.create({
   },
 
   inputBoxTxt : {
-
+    borderBottomWidth: 1
   },
 
   mainImg: {
@@ -47,8 +79,7 @@ const styles = StyleSheet.create({
   },
 
   inputFlex:{
-    flexDirection: 'row',
-    marginTop:30
+    marginTop:30,
+    justifyContent: 'space-evenly'
   }
-
 });
