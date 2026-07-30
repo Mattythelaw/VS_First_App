@@ -22,6 +22,11 @@ function Mainscreen(){
   const [Surname, setSurname] = useState('');
 
   console.log('App works!');
+  
+  const capitalize = (text: string) => {
+    if (text.length === 0) return text;
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  };
 
   return(
 
@@ -34,17 +39,21 @@ function Mainscreen(){
       <Text style={styles.headingTxt}>Enter your name:</Text>
 
       <TextInput style={styles.inputBoxTxt}placeholder="John"
-      onChangeText={newText => setName(newText)} />
+      value={Name}
+      onChangeText={newText => setName(capitalize(newText))} 
+      autoCapitalize="words"/>
 
       <Text style={styles.headingTxt}>Enter your surname:</Text>
 
       <TextInput style={styles.inputBoxTxt}placeholder="Carter"
-      onChangeText={newText => setSurname(newText)}/>
+      value={Surname}
+      onChangeText={newText => setSurname(capitalize(newText))}
+      autoCapitalize="words"/>
       </View>
 
       <Button title="Add User"
         onPress={() => {
-          console.log("Name: " + Name + "Surname: " + Surname) }}/>
+          console.log("Name: " + Name + " Surname: " + Surname) }}/>
 
       <StatusBar style="auto" />
     </View>
