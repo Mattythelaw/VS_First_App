@@ -7,7 +7,7 @@ import { NativeStackScreenProps} from '@react-navigation/native-stack'
 
  type RootStackParamList = {
     Home: undefined,
-    ViewDetails: {
+    View: {
       NameSend: string;
       SurnameSend: string;
     };
@@ -22,7 +22,7 @@ import { NativeStackScreenProps} from '@react-navigation/native-stack'
 
    type ViewDetailsProps = NativeStackScreenProps<
     RootStackParamList,
-    'ViewDetails'
+    'View'
   >;
 
 export default function App() {
@@ -31,7 +31,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name = "Home" component= {Mainscreen}/>
-        <Stack.Screen name = "ViewDetails" component= {ViewDetails}/>
+        <Stack.Screen name = "View" component= {ViewDetails}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -49,11 +49,13 @@ function Mainscreen({ navigation }:
     if (text.length === 0) return text;
     return text.charAt(0).toUpperCase() + text.slice(1);
   };
+  
 
   return(
 
     <View >
-      <Image style={styles.mainImg}source={require('./images/coding.png')}/>
+      <Image style={styles.mainImg}
+      source={require('./images/coding.png')}/>
 
       <Text style={styles.welcomeTxt}>Welcome to my app!</Text>
 
@@ -67,7 +69,8 @@ function Mainscreen({ navigation }:
 
       <Text style={styles.headingTxt}>Enter your surname:</Text>
 
-      <TextInput style={styles.inputBoxTxt}placeholder="Carter"
+      <TextInput style={styles.inputBoxTxt}
+      placeholder="Carter"
       value={Surname}
       onChangeText={newText => setSurname(capitalize(newText))}
       autoCapitalize="words"/>
@@ -75,7 +78,7 @@ function Mainscreen({ navigation }:
 
       <Button title="Add User"
         onPress={() => {
-          navigation.navigate('ViewDetails', {
+          navigation.navigate('View', {
             NameSend : Name,
             SurnameSend : Surname
           });
