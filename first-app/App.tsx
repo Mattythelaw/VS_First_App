@@ -3,21 +3,43 @@ import { StyleSheet, Text, View, TextInput, Button, Image,  } from 'react-native
 import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NativeStackScreenProps} from '@react-navigation/native-stack'
+
+ type RootStackParamList = {
+    Home: undefined,
+    ViewDetails: {
+      NameSend: string;
+      SurnameSend: string;
+    };
+  };
+
+  const Stack = createNativeStackNavigator<RootStackParamList>();
+
+  type MainScreenProps = NativeStackScreenProps<
+    RootStackParamList,
+    'Home'
+  >;
+
+   type ViewDetailsProps = NativeStackScreenProps<
+    RootStackParamList,
+    'ViewDetails'
+  >;
 
 export default function App() {
-
-  const Stack = createNativeStackNavigator();
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name = "Home" component= {Mainscreen}/>
+        <Stack.Screen name = "ViewDetails" component= {ViewDetails}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-function Mainscreen(){
+function Mainscreen({ navigation }: 
+  MainScreenProps){
+
   const [Name, setName] = useState('');
   const [Surname, setSurname] = useState('');
 
@@ -53,13 +75,29 @@ function Mainscreen(){
 
       <Button title="Add User"
         onPress={() => {
-          console.log("Name: " + Name + " Surname: " + Surname) }}/>
-
+          navigation.navigate('ViewDetails', {
+            NameSend : Name,
+            SurnameSend : Surname
+          });
+        }}/>
       <StatusBar style="auto" />
     </View>
 
   )
 
+}
+
+function ViewDetails({ navigation, route }: 
+  ViewDetailsProps){
+
+  const NameGet = route.params.NameSend;
+  const SurnameGet = route.params.SurnameSend;
+
+  return(
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Name: {NameGet} Surname: {SurnameGet}</Text>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
