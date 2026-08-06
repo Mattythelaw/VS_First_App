@@ -42,6 +42,7 @@ function Mainscreen({ navigation }:
 
   const [Name, setName] = useState('');
   const [Surname, setSurname] = useState('');
+  const [Error, setError] = useState('');
 
   console.log('App works!');
   
@@ -62,6 +63,7 @@ function Mainscreen({ navigation }:
       <Text style={styles.welcomeTxt}>Welcome to my app!</Text>
       
     <FadeInView>
+      <Text style={styles.redTxt}>{Error}</Text>
       <View style={styles.inputFlex}>
       <Text style={styles.headingTxt}>Enter your name:</Text>
 
@@ -82,10 +84,19 @@ function Mainscreen({ navigation }:
 
       <Button title="Add User"
         onPress={() => {
+
+        if ((isEmpty(Name)==false) && (isEmpty(Surname)==false)){
+
           navigation.navigate('View', {
             NameSend : Name,
             SurnameSend : Surname
           });
+          setError("");
+        }
+        else{
+          setError("Fields are empty!");
+        }
+        
         }}/>
       <StatusBar style="auto" />
       </ScrollView>
@@ -105,6 +116,16 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>Name: {NameGet} Surname: {SurnameGet}</Text>
     </View>
+  )
+}
+
+function isEmpty(value: any){
+  return(
+    (value === null) ||
+
+    (value.hasOwnProperty('length') && value.length === 0)
+
+    (value.constructor === Object && Object.keys(value).length === 0)
   )
 }
 
@@ -167,5 +188,12 @@ const styles = StyleSheet.create({
   inputFlex:{
     marginTop:30,
     justifyContent: 'space-evenly'
+  },
+
+  redTxt: {
+    color: 'red',
+    fontWeight: 'bold',
+    fontSize: 30,
+    textAlign: 'center'
   }
 });
