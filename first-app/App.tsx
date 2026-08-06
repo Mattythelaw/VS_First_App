@@ -42,7 +42,7 @@ function Mainscreen({ navigation }:
 
   const [Name, setName] = useState('');
   const [Surname, setSurname] = useState('');
-  const [Error, setError] = useState('');
+  const [Error, setError] = useState(false);
 
   console.log('App works!');
   
@@ -63,7 +63,7 @@ function Mainscreen({ navigation }:
       <Text style={styles.welcomeTxt}>Welcome to my app!</Text>
       
     <FadeInView>
-      <Text style={styles.redTxt}>{Error}</Text>
+      <Text style={Error? styles.redTxt : styles.blank}>{Error? "Please enter your info": ""}</Text>
       <View style={styles.inputFlex}>
       <Text style={styles.headingTxt}>Enter your name:</Text>
 
@@ -91,10 +91,10 @@ function Mainscreen({ navigation }:
             NameSend : Name,
             SurnameSend : Surname
           });
-          setError("");
+          setError(false);
         }
         else{
-          setError("Fields are empty!");
+          setError(true);
         }
         
         }}/>
@@ -123,7 +123,7 @@ function isEmpty(value: any){
   return(
     (value === null) ||
 
-    (value.hasOwnProperty('length') && value.length === 0)
+    (value.hasOwnProperty('length') && value.length === 0) ||
 
     (value.constructor === Object && Object.keys(value).length === 0)
   )
@@ -195,5 +195,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
     textAlign: 'center'
+  },
+
+  blank: {
+    fontSize: 0
   }
 });
