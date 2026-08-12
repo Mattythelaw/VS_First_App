@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, ReactNode } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NativeStackScreenProps} from '@react-navigation/native-stack'
+import { RadioButton } from 'react-native-paper'
 
  type RootStackParamList = {
     Home: undefined,
@@ -111,11 +112,56 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
 
   const NameGet = route.params.NameSend;
   const SurnameGet = route.params.SurnameSend;
+  const [selectedValue, setSelectedValue] = useState('0');
 
   return(
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Name: {NameGet} Surname: {SurnameGet}</Text>
+      <View style={{ flex: 0, alignItems: 'center', justifyContent: 'center'}}>
+      <Text style={{ fontWeight: 'bold', fontSize: 25}}> Welcome {NameGet} {SurnameGet}</Text>
+      <Text>Please choose a language:</Text>
     </View>
+
+    <View style={styles.radioContainer}>
+      <View style={styles.radioGroup}>
+        <View style={styles.radioButton}>
+          <RadioButton.Android
+            value="1"
+            status={selectedValue == "1" ? 'checked' : 'unchecked'}
+
+            onPress={() => setSelectedValue('1')}
+
+            color= "#ff0080"
+          />
+          <Text style={styles.radioLabel}>React Native</Text>
+          
+        </View>
+         <View style={styles.radioButton}>
+          <RadioButton.Android
+            value="1"
+            status={selectedValue == "2" ? 'checked' : 'unchecked'}
+
+            onPress={() => setSelectedValue('1')}
+
+            color= "#ff0080"
+          />
+          <Text style={styles.radioLabel}>Kotlin</Text>
+          
+        </View>
+       <View style={styles.radioButton}>
+          <RadioButton.Android
+            value="1"
+            status={selectedValue == "3" ? 'checked' : 'unchecked'}
+
+            onPress={() => setSelectedValue('1')}
+
+            color= "#ff0080"
+          />
+          <Text style={styles.radioLabel}>HTML-CSS</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  
   )
 }
 
@@ -199,5 +245,41 @@ const styles = StyleSheet.create({
 
   blank: {
     fontSize: 0
+  },
+
+  radioContainer: {
+    flex: 0,
+    backgroundColor: '#ffb3e6',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  radioButton: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+
+  radioLabel: {
+    marginLeft: 5,
+    fontSize: 15,
+    color: '#000000'
+  },
+
+  radioGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    marginTop: 20,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    padding: 15,
+    elevation: 5,
+    shadowColor: '#3d3d5c',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
   }
 });
