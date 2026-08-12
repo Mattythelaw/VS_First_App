@@ -140,7 +140,7 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
             value="1"
             status={selectedValue == "2" ? 'checked' : 'unchecked'}
 
-            onPress={() => setSelectedValue('1')}
+            onPress={() => setSelectedValue('2')}
 
             color= "#ff0080"
           />
@@ -152,7 +152,7 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
             value="1"
             status={selectedValue == "3" ? 'checked' : 'unchecked'}
 
-            onPress={() => setSelectedValue('1')}
+            onPress={() => setSelectedValue('3')}
 
             color= "#ff0080"
           />
