@@ -210,7 +210,22 @@ interface SlideinProps {
   style?: StyleProp<ViewStyle>;
 }
 
+const Slidein = ({children, style}: FadeInViewProps) => {
+  const t = useRef(new Animated.Value(40)).current;
+  const o = useRef(new Animated.Value(0)).current;
 
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(t, { toValue: 0, duration: 450, easing: Easing.out(Easing.cubic), useNativeDriver: true }),
+
+      Animated.timing(o, { toValue: 1, duration: 350, useNativeDriver: true })
+    ]).start();
+  }, []);  
+    
+  return <Animated.View style={{ transform: [{ translateY: t }], opacity: o }}>
+    {children}
+  </Animated.View>;
+  }
 
 const styles = StyleSheet.create({
   welcomeTxt: {
