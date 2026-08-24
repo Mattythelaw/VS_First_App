@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, Image,  SafeAreaView, ScrollView, Animated, ViewStyle, StyleProp} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Image,  SafeAreaView, ScrollView, Animated, Easing, ViewStyle, StyleProp} from 'react-native';
 import { useState, useRef, useEffect, ReactNode } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -205,6 +205,12 @@ return(
   )
 
 }
+interface SlideinProps {
+  children: ReactNode;
+  style?: StyleProp<ViewStyle>;
+}
+
+
 
 const styles = StyleSheet.create({
   welcomeTxt: {
