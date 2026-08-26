@@ -163,7 +163,7 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
         </View>
          <View style={styles.radioButton}>
           <RadioButton.Android
-            value="2"
+            value="1"
             status={selectedValue == "2" ? 'checked' : 'unchecked'}
 
             onPress={() => setSelectedValue('2')}
@@ -175,7 +175,7 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
         </View>
        <View style={styles.radioButton}>
           <RadioButton.Android
-            value="3"
+            value="1"
             status={selectedValue == "3" ? 'checked' : 'unchecked'}
 
             onPress={() => setSelectedValue('3')}
