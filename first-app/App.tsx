@@ -163,7 +163,7 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
         </View>
          <View style={styles.radioButton}>
           <RadioButton.Android
-            value="1"
+            value="2"
             status={selectedValue == "2" ? 'checked' : 'unchecked'}
 
             onPress={() => setSelectedValue('2')}
@@ -175,7 +175,7 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
         </View>
        <View style={styles.radioButton}>
           <RadioButton.Android
-            value="1"
+            value="3"
             status={selectedValue == "3" ? 'checked' : 'unchecked'}
 
             onPress={() => setSelectedValue('3')}
@@ -197,8 +197,10 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
               switch(selectedValue){
                 case "1":
                   setImage(require('./images/React-Native.png'));
+                  break;
                 case "2":
                   setImage(require('./images/Kotlin.jpg'));
+                  break;
                 case "3":    
                   setImage(require('./images/HTML-CSS.png'));
                   break;
