@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, Image,  SafeAreaView, ScrollView, Animated, Easing, ViewStyle, StyleProp} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Image,  SafeAreaView, ScrollView, Animated, Easing, ViewStyle, StyleProp, ImageSourcePropType} from 'react-native';
 import { useState, useRef, useEffect, ReactNode } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -44,7 +44,7 @@ export default function App() {
   );
 }
 
-// This is the Home screen and the "naviagtion" is a remote control that allows you to navigate to 
+// This is the Home screen and the "navigation" is a remote control that allows you to navigate to 
 // to the other screens
 function Mainscreen({ navigation }: 
   MainScreenProps){
@@ -138,6 +138,7 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
   const NameGet = route.params.NameSend;
   const SurnameGet = route.params.SurnameSend;
   const [selectedValue, setSelectedValue] = useState('0');
+  const [ ImageBlock, setImage ] = useState<ImageSourcePropType | undefined>(undefined);
 
   return(
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -162,7 +163,7 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
         </View>
          <View style={styles.radioButton}>
           <RadioButton.Android
-            value="2"
+            value="1"
             status={selectedValue == "2" ? 'checked' : 'unchecked'}
 
             onPress={() => setSelectedValue('2')}
@@ -174,7 +175,7 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
         </View>
        <View style={styles.radioButton}>
           <RadioButton.Android
-            value="3"
+            value="1"
             status={selectedValue == "3" ? 'checked' : 'unchecked'}
 
             onPress={() => setSelectedValue('3')}
@@ -184,6 +185,29 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
           <Text style={styles.radioLabel}>HTML-CSS</Text>
           </View>
         </View>
+      </View>
+      <View style = {{flex: 1}}>
+        <Text style ={{fontWeight: "bold", flex:0, paddingTop: 30, justifyContent: "center", 
+          textAlign: "center", alignItems: "center"}}>
+          Generate Chosen Language Image
+          </Text>
+          <Button title = "Display"
+            onPress={() => {
+
+              switch(selectedValue){
+                case "1":
+                  setImage(require('./images/React-Native.png'));
+                case "2":
+                  setImage(require('./images/Kotlin.jpg'));
+                case "3":    
+                  setImage(require('./images/HTML-CSS.png'));
+                  break;
+                default:
+                  setImage(undefined);   
+              }
+            }}
+          />
+          ///////////////////////////////////////////////////////////////
       </View>
     </View>
   
