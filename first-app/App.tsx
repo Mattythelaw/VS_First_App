@@ -207,7 +207,9 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
               }
             }}
           />
-          ///////////////////////////////////////////////////////////////
+          <View style = {styles.container}>
+            <Image source={ ImageBlock} style = {styles.viewImage}></Image>
+          </View>
       </View>
     </View>
   
@@ -351,5 +353,19 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3,
+  },
+
+  viewImage: {
+    width: 350,
+    height: 350,
+    alignContent: 'center'
+  },
+
+  container: {
+    flex: 0,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
+
+
 });
