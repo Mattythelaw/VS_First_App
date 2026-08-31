@@ -138,7 +138,15 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
   const NameGet = route.params.NameSend;
   const SurnameGet = route.params.SurnameSend;
   const [selectedValue, setSelectedValue] = useState('0');
-  const [ ImageBlock, setImage ] = useState<ImageSourcePropType | undefined>(undefined);
+  const [iSelected, setIntValue] = useState(0);
+  // const [ ImageBlock, setImage ] = useState<ImageSourcePropType | undefined>(undefined);
+  const [blockArray] = useState<ImageSourcePropType[]>([
+    undefined,
+    require('./img/React_Native.png'),
+    require('./img/Kotlin.jpg'),
+    require('./img/HTML-CSS.png'),
+  ]);
+
 
   return(
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -178,7 +186,7 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
             value="1"
             status={selectedValue == "3" ? 'checked' : 'unchecked'}
 
-            onPress={() => setSelectedValue('3')}
+            onPress={() => setSelectedValue('3')} 
 
             color= "#ff0080"
           />
@@ -193,24 +201,10 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
           </Text>
           <Button title = "Display"
             onPress={() => {
-
-              switch(selectedValue){
-                case "1":
-                  setImage(require('./images/React-Native.png'));
-                  break;
-                case "2":
-                  setImage(require('./images/Kotlin.jpg'));
-                  break;
-                case "3":    
-                  setImage(require('./images/HTML-CSS.png'));
-                  break;
-                default:
-                  setImage(undefined);   
-              }
-            }}
-          />
+              setIntValue(Number(selectedValue));
+            }}/>
           <View style = {styles.container}>
-            <Image source={ ImageBlock} style = {styles.viewImage}></Image>
+            <Image source={ blockArray[iSelected] } style ={styles.viewImage}></Image>
           </View>
       </View>
     </View>
