@@ -7,11 +7,12 @@ import { NativeStackScreenProps} from '@react-navigation/native-stack'
 import { RadioButton } from 'react-native-paper'
 
  type RootStackParamList = {
-    Home: undefined,
+    Home: undefined;
     View: {
       NameSend: string;
       SurnameSend: string;
     };
+    ListSkills: undefined;
   };
 
   // This sets up the "naviagtor" which controls teh switching of screens
@@ -28,6 +29,11 @@ import { RadioButton } from 'react-native-paper'
     'View'
   >;
 
+  type ListSkillsProps = NativeStackScreenProps<
+    RootStackParamList,
+    'ListSkills'
+  >;
+
 // This is the first thing that gets displayed when the app opens
 export default function App() {
 
@@ -39,6 +45,7 @@ export default function App() {
          is hwoing the ViewDetails component */}
         <Stack.Screen name = "Home" component= {Mainscreen}/>
         <Stack.Screen name = "View" component= {ViewDetails}/>
+        <Stack.Screen name = "ListSkills" component= {ListSkills}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -212,6 +219,17 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
   )
 }
 
+function ListSkills({ navigation, route }: ListSkillsProps){
+  const [txtSkill, setSkill] = useState('');
+  
+  return(
+    <View>
+
+    </View>
+  )
+
+}
+
 function isEmpty(value: any){
   return(
     (value === null) ||
@@ -361,6 +379,46 @@ const styles = StyleSheet.create({
     flex: 0,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+
+  bannerImg: {
+    height: 350,
+    alignContent: "center"
+  },
+  
+  inputContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 25,
+    borderBottomWidth: 1,
+    borderBottomColor: '#aaa5a5'
+  },
+
+  textInput: {
+    borderWidth: 1,
+    borderColor: '#e78a8a',
+    width: '70%',
+    margin: 7,
+    padding: 5
+  },
+
+  appContainer: {
+    flex: 1,
+    padding: 50,
+    paddingHorizontal: 15,
+  },
+
+  skillContainer: {
+    flex: 5
+  },
+
+  skillText: {
+    fontSize: 15,
+    marginVertical: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: '#51b1e1'
   }
 
 
