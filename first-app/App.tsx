@@ -2,37 +2,65 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, Image,  SafeAreaView, ScrollView, Animated, Easing, ViewStyle, StyleProp, ImageSourcePropType} from 'react-native';
 import { useState, useRef, useEffect, ReactNode } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NativeStackScreenProps} from '@react-navigation/native-stack'
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import { NativeStackScreenProps} from '@react-navigation/native-stack'
 import { RadioButton } from 'react-native-paper'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { MaterialTopTabScreenProps } from '@react-navigation/material-top-tabs';
 
- type RootStackParamList = {
+//  type RootStackParamList = {
+//     Home: undefined;
+//     View: {
+//       NameSend: string;
+//       SurnameSend: string;
+//     };
+//     ListSkills: undefined;
+//   };
+
+//   // This sets up the "naviagtor" which controls teh switching of screens
+//   const Stack = createNativeStackNavigator<RootStackParamList>();
+
+//   // This describes what information gets passed in each screen
+//   type MainScreenProps = NativeStackScreenProps<
+//     RootStackParamList,
+//     'Home'
+//   >;
+
+//    type ViewDetailsProps = NativeStackScreenProps<
+//     RootStackParamList,
+//     'View'
+//   >;
+
+//   type ListSkillsProps = NativeStackScreenProps<
+//     RootStackParamList,
+//     'ListSkills'
+//   >;
+
+  type TabParamList = {
     Home: undefined;
-    View: {
+
+    ViewDetails: {
       NameSend: string;
       SurnameSend: string;
     };
+
     ListSkills: undefined;
   };
-
-  // This sets up the "naviagtor" which controls teh switching of screens
-  const Stack = createNativeStackNavigator<RootStackParamList>();
-
-  // This describes what information gets passed in each screen
-  type MainScreenProps = NativeStackScreenProps<
-    RootStackParamList,
+  const Tab = createMaterialTopTabNavigator<TabParamList>();
+  type MainScreenProps = MaterialTopTabScreenProps<
+    TabParamList,
     'Home'
   >;
-
-   type ViewDetailsProps = NativeStackScreenProps<
-    RootStackParamList,
-    'View'
-  >;
-
-  type ListSkillsProps = NativeStackScreenProps<
-    RootStackParamList,
+  type ListSkillsProps = MaterialTopTabScreenProps<
+    TabParamList,
     'ListSkills'
   >;
+
+  type ViewDetailsProps = MaterialTopTabScreenProps<
+    TabParamList,
+    'ViewDetails'
+  >;
+  
 
 // This is the first thing that gets displayed when the app opens
 export default function App() {
@@ -40,13 +68,13 @@ export default function App() {
   return (
     // Everthing that is related to navigation has to stay inside of this
     <NavigationContainer>
-      <Stack.Navigator>
+      <Tab.Navigator screenOptions={{ tabBarStyle: { marginTop: 30,},}}>
          {/* This tells the app that the "Home" screen is howing the Mainscreen component and the "View" screen
          is hwoing the ViewDetails component */}
-        <Stack.Screen name = "Home" component= {Mainscreen}/>
-        <Stack.Screen name = "View" component= {ViewDetails}/>
-        <Stack.Screen name = "ListSkills" component= {ListSkills}/>
-      </Stack.Navigator>
+        <Tab.Screen name = "Home" component= {Mainscreen}/>
+        <Tab.Screen name = "ViewDetails" component= {ViewDetails}/>
+        <Tab.Screen name = "ListSkills" component= {ListSkills}/>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
@@ -119,7 +147,7 @@ function Mainscreen({ navigation }:
         if ((isEmpty(Name)==false) && (isEmpty(Surname)==false)){
 
           // Proceed to the "View" screen and with the name and surname
-          navigation.navigate('View', {
+          navigation.navigate('ViewDetails', {
             NameSend : Name,
             SurnameSend : Surname
           });
@@ -142,16 +170,16 @@ function Mainscreen({ navigation }:
 
 function ViewDetails({ navigation, route }: ViewDetailsProps){
 
-  const NameGet = route.params.NameSend;
-  const SurnameGet = route.params.SurnameSend;
+  const NameGet = route.params?.NameSend;
+  const SurnameGet = route.params?.SurnameSend;
   const [selectedValue, setSelectedValue] = useState('0');
   const [iSelected, setIntValue] = useState(0);
   // const [ ImageBlock, setImage ] = useState<ImageSourcePropType | undefined>(undefined);
   const [blockArray] = useState<ImageSourcePropType[]>([
     undefined,
-    require('./img/React_Native.png'),
-    require('./img/Kotlin.jpg'),
-    require('./img/HTML-CSS.png'),
+    require('./images/React-Native.png'),
+    require('./images/Kotlin.jpg'),
+    require('./images/HTML-CSS.png'),
   ]);
 
 
@@ -428,6 +456,7 @@ const styles = StyleSheet.create({
 
   bannerImg: {
     height: 350,
+    width: 500,
     alignContent: "center"
   },
   
