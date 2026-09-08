@@ -248,17 +248,30 @@ function ViewDetails({ navigation, route }: ViewDetailsProps){
 }
 
 function ListSkills({ navigation, route }: ListSkillsProps){
-  const [Skills] = useState<string[]>([]);
+  const [Skills, setSkills] = useState<string[]>([]);
   const [txtSkill, setSkill] = useState('');
+
+  const removeSkillHandler = (index: number) => {
+    setSkills((currentSkills) => currentSkills.filter((skill, i) => i !== index));
+  }
+
+  
 
   const renderSkills = () => {
     const arrOutput = [];
 
     for (let i=0; i < Skills.length; i++){
       arrOutput.push(
-        <Text key={i} style={styles.skillText}>
+        <View key={i} style={styles.inputContainer}>
+          <Text style={styles.skillText}>
           {Skills[i]}
-        </Text>
+          </Text>
+
+          {/* Assigning the deletBtn to the button (delete button) */}
+          <TouchableOpacity onPress={() => removeSkillHandler(i)} style={styles.deleteBtn}>
+            <Text style={styles.deleteBtnTxt}>Remove</Text>
+          </TouchableOpacity>
+        </View>
       )
     }
     return arrOutput;
@@ -493,6 +506,17 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderBottomWidth: 1,
     borderBottomColor: '#51b1e1'
+  },
+
+  deleteBtn: {
+    backgroundColor: '#d85555',
+    padding: 5,
+    borderRadius: 5
+  },
+
+  deleteBtnTxt: {
+    color: 'white',
+    fontWeight: 'bold'
   }
 
 
