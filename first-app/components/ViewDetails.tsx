@@ -2,6 +2,7 @@ import { Button, Text, View, Image, ImageSourcePropType } from 'react-native';
 import { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 import styles from '../components/Styles';
+import { ViewDetailsProps } from '../App';
 
 function ViewDetails({ navigation, route }: ViewDetailsProps){
 

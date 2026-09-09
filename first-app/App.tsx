@@ -6,6 +6,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { RadioButton } from 'react-native-paper'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { MaterialTopTabScreenProps } from '@react-navigation/material-top-tabs';
+import MainScreen from './components/MainScreen';
+import ViewDetails from './components/ViewDetails';
+import ListSkills from './components/ListSkills';
 
 //  type RootStackParamList = {
 //     Home: undefined;
@@ -70,7 +73,7 @@ export default function App() {
       <Tab.Navigator screenOptions={{ tabBarStyle: { marginTop: 30,},}}>
          {/* This tells the app that the "Home" screen is howing the Mainscreen component and the "View" screen
          is hwoing the ViewDetails component */}
-        <Tab.Screen name = "Home" component= {Mainscreen}/>
+        <Tab.Screen name = "Home" component= {MainScreen}/>
         <Tab.Screen name = "ViewDetails" component= {ViewDetails}/>
         <Tab.Screen name = "ListSkills" component= {ListSkills}/>
       </Tab.Navigator>
