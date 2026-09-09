@@ -70,4 +70,6 @@ function ListSkills({ navigation, route }: ListSkillsProps){
     </View>
   )
 
-};
+}
+
+export default ListSkills;
